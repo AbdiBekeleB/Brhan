@@ -45,7 +45,7 @@ def view_items(request):
     else:
         return Response(status = status.HTTP_404_NOT_FOUND)
     
-@api_view(['POST'])
+@api_view(['PUT'])
 def update_items(request,pk):
     item = Item.objects.get(pk = pk)
     data = ItemSerializer(instance=item , data=request.data)
