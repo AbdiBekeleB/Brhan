@@ -1,67 +1,58 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
-from .models import Item
-from .serializers import ItemSerializer
-from rest_framework import serializers
-from rest_framework import status
-
-@api_view(['GET'])
-def ApiOverview(request):
-    api_urls = {
-        'all_items': '/',
-        'Search by name': '/?name=names',
-        'Search by description':'/?description=descriptions_names',
-        'Add':'/create',
-        'Update':'/update/pk',
-        'Delete':'/item/pk/delete/',
-    }
-    return Response(api_urls)
-
-@api_view(['POST'])
-def add_items(request):
-    item = ItemSerializer(data=request.data)
-    
-    if Item.objects.filter(**request.data).exists():
-        raise serializers.ValidationError('This data already exists')
-    if item.is_valid():
-        item.save()
-        return Response(item.data)
-    else:
-        return Response(status=status.HTTP_400_NOT_FOUND)
-    
-@api_view(['GET'])
-def view_items(request):
-    
-    if request.query_params:
-        items = Item.objects.filter(**request.query_params.dict())
-    else:
-        items = Item.objects.all()
-    
-    if items:
-        serializers = ItemSerializer(items, many= True)
-        return Response(serializers.data)
-    else:
-        return Response(status = status.HTTP_404_NOT_FOUND)
-    
-@api_view(['PUT'])
-def update_items(request,pk):
-    item = Item.objects.get(pk = pk)
-    data = ItemSerializer(instance=item , data=request.data)
-    
-    if data.is_valid():
-        data.save()
-        return Response(data.data)
-    else:
-        return Response(status=status.HTTP_404_NOT_FOUND)   
-    
-@api_view(['DELETE'])
-def delete_items(request, pk):
-    item = get_object_or_404(Item , pk=pk)
-    item.delete()
-    return Response(status=204)  
-                   
-
-
-# Create your views here.
+from rest_framework import viewsets, status 
+from rest_framework.decorators import action 
+from rest_framework.response import Response 
+from django.shortcuts import get_object_or_404 
+from .models import Item 
+from .serializers import ItemSerializer 
+ 
+class ItemViewSet(viewsets.ModelViewSet): 
+    queryset = Item.objects.all() 
+    serializer_class = ItemSerializer 
+ 
+    @action(detail=False, methods=['get']) 
+    def all_items(self, request): 
+        items = self.get_queryset() 
+        serializer = self.get_serializer(items, many=True) 
+        return Response(serializer.data) 
+ 
+    @action(detail=False, methods=['get']) 
+    def search_by_name(self, request): 
+        name = request.query_params.get('name', None) 
+        if name: 
+            items = Item.objects.filter(name__icontains=name) 
+        else: 
+            items = Item.objects.all() 
+        serializer = self.get_serializer(items, many=True) 
+        return Response(serializer.data) 
+ 
+    @action(detail=False, methods=['get']) 
+    def search_by_description(self, request): 
+        description = request.query_params.get('description', None) 
+        if description: 
+            items = Item.objects.filter(description__icontains=description) 
+        else: 
+            items = Item.objects.all() 
+        serializer = self.get_serializer(items, many=True) 
+        return Response(serializer.data) 
+ 
+    def create(self, request): 
+        serializer = self.get_serializer(data=request.data) 
+        if serializer.is_valid(): 
+            serializer.save() 
+            return Response(serializer.data, status=status.HTTP_201_CREATED) 
+        else: 
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+ 
+    def update(self, request, pk=None): 
+        item = self.get_object() 
+        serializer = self.get_serializer(item, data=request.data) 
+        if serializer.is_valid(): 
+            serializer.save() 
+            return Response(serializer.data) 
+        else: 
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+ 
+    def destroy(self, request, pk=None): 
+        item = self.get_object() 
+        item.delete() 
+        return Response(status=status.HTTP_204_NO_CONTENT)
