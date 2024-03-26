@@ -56,6 +56,7 @@ const AddItemModal = (props) => {
                     required
                     placeholder="Enter description"
                     className="rounded"
+                    rows={3}
                   />
                 </Form.Group>
                 <Form.Group controlId="quantity">

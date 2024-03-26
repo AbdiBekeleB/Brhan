@@ -33,19 +33,13 @@ const UpdateItemModal = (props) => {
       });
   };
 
-  const handleReset = () => {
-    setName(props.item.name || "");
-    setDescription(props.item.description || "");
-    setQuantity(props.item.quantity || "");
-    setUnitOfMeasure(props.item.unit_of_measure || "");
-    setPrice(props.item.price || "");
-  };
-
   return (
     <div className="container">
       <Modal {...props} size="md" centered>
         <Modal.Header closeButton>
-          <Modal.Title className="text-center">Update Item Information</Modal.Title>
+          <Modal.Title className="text-center">
+            Update Item Information
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Row>
@@ -91,7 +85,7 @@ const UpdateItemModal = (props) => {
                     name="unit_of_measure"
                     value={unitOfMeasure}
                     onChange={(e) => setUnitOfMeasure(e.target.value)}
-                    className="rounded-pill"
+                    className="form-select rounded-pill"
                   >
                     <option value="">Select Unit</option>
                     <option value="kg">kg</option>
@@ -110,7 +104,11 @@ const UpdateItemModal = (props) => {
                   />
                 </Form.Group>
                 <Form.Group className="d-flex justify-content-center mt-3">
-                  <Button variant="primary" type="submit" className="rounded-pill btn-md">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    className="rounded-pill btn-md"
+                  >
                     Submit
                   </Button>
                 </Form.Group>

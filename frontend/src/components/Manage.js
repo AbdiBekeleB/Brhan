@@ -62,7 +62,13 @@ const Manage = () => {
     <div className="container-fluid side-container">
       <div className="row side-row">
         <p id="manage"></p>
-        <Table striped bordered hover className="react-bootstrap-table" id="dataTable">
+        <Table
+          striped
+          bordered
+          hover
+          className="react-bootstrap-table"
+          id="dataTable"
+        >
           <thead>
             <tr>
               <th>ID</th>
@@ -85,15 +91,14 @@ const Manage = () => {
                 <td>{item.price}</td>
                 <td>
                   <Button
-                    className="mr-2"
+                    className="me-3"
                     variant="danger"
                     onClick={(event) => handleDelete(event, item.id)}
                   >
                     <RiDeleteBin5Line />
                   </Button>
-                  <span className="mr-2">&nbsp;&nbsp;&nbsp;</span>
                   <Button
-                    className="mr-2"
+                    className="me-0"
                     onClick={(event) => handleUpdate(event, item)}
                   >
                     <FaEdit />
