@@ -19,6 +19,7 @@ const UpdateItemModal = (props) => {
       .then(() => {
         alert("Successfully Updated.");
         props.setUpdated(true);
+        props.onHide(); // Close the modal after successful submission if needed
       })
       .catch((error) => {
         console.error("Failed to update item:", error);
@@ -37,15 +38,26 @@ const UpdateItemModal = (props) => {
 
   return (
     <div className="container">
-      <Modal {...props} size="md" centered>
-        <Modal.Header closeButton>
+      <Modal
+        {...props}
+        size="md"
+        centered
+        style={{ backgroundColor: "#3D405B" }}
+      >
+        <Modal.Header
+          closeButton
+          style={{ backgroundColor: "#143636", color: "#8996a3" }}
+        >
           <Modal.Title className="text-center">
             Update Item Information
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body
+          className="rounded-bottom"
+          style={{ backgroundColor: "#143636", color: "#8996a3" }}
+        >
           <Row>
-            <Col sm={9} className="mx-auto">
+            <Col sm={12} md={8} className="mx-auto">
               <Form onSubmit={handleSubmit(onSubmit)}>
                 <Form.Group controlId="name">
                   <Form.Label className="fw-bold">Name</Form.Label>
@@ -53,7 +65,7 @@ const UpdateItemModal = (props) => {
                     type="text"
                     name="name"
                     required
-                    className="rounded-pill"
+                    className="rounded-3 mb-2"
                     {...register("name")}
                   />
                 </Form.Group>
@@ -64,7 +76,7 @@ const UpdateItemModal = (props) => {
                     as="textarea"
                     name="description"
                     required
-                    className="rounded"
+                    className="rounded-3 mb-2"
                     {...register("description")}
                   />
                 </Form.Group>
@@ -74,7 +86,7 @@ const UpdateItemModal = (props) => {
                   <Form.Control
                     type="number"
                     name="quantity"
-                    className="rounded-pill"
+                    className="rounded-3 mb-2"
                     {...register("quantity")}
                   />
                 </Form.Group>
@@ -84,7 +96,7 @@ const UpdateItemModal = (props) => {
                   <Form.Control
                     as="select"
                     name="unit_of_measure"
-                    className="form-select rounded-pill"
+                    className="form-select rounded-3 mb-2"
                     {...register("unit_of_measure")}
                   >
                     <option value="">Select Unit</option>
@@ -99,7 +111,7 @@ const UpdateItemModal = (props) => {
                   <Form.Control
                     type="number"
                     name="price"
-                    className="rounded-pill"
+                    className="rounded-3 mb-2"
                     {...register("price")}
                   />
                 </Form.Group>
@@ -108,7 +120,7 @@ const UpdateItemModal = (props) => {
                   <Button
                     variant="primary"
                     type="submit"
-                    className="rounded-pill btn-md"
+                    className="rounded-3 btn-md"
                   >
                     Submit
                   </Button>

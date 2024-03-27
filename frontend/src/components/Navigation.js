@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import logo from "../static/logo.jpg";
+import logo from "../static/logo.png";
 import "../App.css";
 import {
   CDBSidebar,
@@ -15,7 +15,13 @@ import { NavLink } from "react-router-dom";
 const Navigation = () => {
   return (
     <div>
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar
+        style={{
+          backgroundColor: "#3D405B",
+        }}
+        variant="dark"
+        expand="lg"
+      >
         <Navbar.Brand className="app-logo" href="/">
           <img
             alt=""
@@ -28,7 +34,7 @@ const Navigation = () => {
         </Navbar.Brand>
       </Navbar>
       <div className="sidebar">
-        <CDBSidebar textColor="#fff" backgroundColor="#333">
+        <CDBSidebar textColor="#fff" backgroundColor="#143636" effect="shrink">
           <CDBSidebarHeader
             prefix={<i className="fa fa-bars" />}
             className="sidebar-header"

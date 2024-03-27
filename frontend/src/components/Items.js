@@ -24,6 +24,7 @@ const Items = () => {
           striped
           bordered
           hover
+          variant="dark"
           className="react-bootstrap-table"
           id="dataTable"
         >

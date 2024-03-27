@@ -28,13 +28,14 @@ const AddItemModal = (props) => {
         aria-labelledby="contained-modal-title-vcenter"
         centered
         className="custom-modal"
+        style={{ backgroundColor: "#3D405B" }}
       >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
+        <Modal.Header closeButton style={{ backgroundColor: "#143636", color: "#8996a3"}}>
+          <Modal.Title id="contained-modal-title-vcenter" className="text-center">
             Fill In Item Information
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className=" rounded-bottom" style={{ backgroundColor: "#143636", color: "#8996a3"}}>
           <Row>
             <Col sm={12} md={8} className="mx-auto">
               <Form onSubmit={handleSubmit}>
@@ -45,7 +46,7 @@ const AddItemModal = (props) => {
                     name="name"
                     required
                     placeholder="Enter name"
-                    className="rounded-pill"
+                    className="rounded-3 mb-2"
                   />
                 </Form.Group>
                 <Form.Group controlId="description">
@@ -55,8 +56,7 @@ const AddItemModal = (props) => {
                     name="description"
                     required
                     placeholder="Enter description"
-                    className="rounded"
-                    rows={3}
+                    className="rounded mb-2"
                   />
                 </Form.Group>
                 <Form.Group controlId="quantity">
@@ -66,7 +66,7 @@ const AddItemModal = (props) => {
                     name="quantity"
                     required
                     placeholder="Enter quantity"
-                    className="rounded-pill"
+                    className="rounded-3 mb-2"
                   />
                 </Form.Group>
                 <Form.Group controlId="unit_of_measure">
@@ -75,7 +75,7 @@ const AddItemModal = (props) => {
                     as="select"
                     name="unit_of_measure"
                     required
-                    className="form-select rounded-pill"
+                    className="form-select rounded-3 mb-2"
                   >
                     <option value="">Select Unit</option>
                     <option value="ltr">kg</option>
@@ -90,14 +90,14 @@ const AddItemModal = (props) => {
                     name="price"
                     required
                     placeholder="Enter price"
-                    className="rounded-pill"
+                    className="rounded-3 mb-2"
                   />
                 </Form.Group>
                 <Form.Group className="text-center mt-3">
                   <Button
                     variant="primary"
                     type="submit"
-                    className="rounded-pill btn-md"
+                    className="rounded-3 btn-md"
                   >
                     Submit
                   </Button>

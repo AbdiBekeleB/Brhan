@@ -18,7 +18,6 @@ export function deleteItem(id) {
     .then((response) => response.data);
 }
 
-
 export function addItem(item) {
   return axios
     .post("http://localhost:8000/api/items/", {

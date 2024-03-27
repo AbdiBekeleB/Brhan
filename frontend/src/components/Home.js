@@ -12,10 +12,10 @@ const Home = () => {
           <img className="d-block w-100" src={s01} alt="First slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={s03} alt="Second slide" />
+          <img className="d-block w-100" src={s02} alt="Second slide" />
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src={s02} alt="Third slide" />
+          <img className="d-block w-100" src={s03} alt="Third slide" />
         </Carousel.Item>
       </Carousel>
     </div>

@@ -66,6 +66,7 @@ const Manage = () => {
           striped
           bordered
           hover
+          variant="dark"
           className="react-bootstrap-table"
           id="dataTable"
         >
@@ -94,14 +95,16 @@ const Manage = () => {
                     className="me-3"
                     variant="danger"
                     onClick={(event) => handleDelete(event, item.id)}
+                    style={{ fontSize: "5px" }}
                   >
-                    <RiDeleteBin5Line />
+                    <RiDeleteBin5Line style={{ fontSize: "15px" }} />
                   </Button>
                   <Button
                     className="me-0"
                     onClick={(event) => handleUpdate(event, item)}
+                    style={{ fontSize: "5px" }}
                   >
-                    <FaEdit />
+                    <FaEdit style={{ fontSize: "15px" }} />
                   </Button>
                   <UpdateItemModal
                     show={editModalShow}
